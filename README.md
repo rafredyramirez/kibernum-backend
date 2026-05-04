@@ -63,6 +63,26 @@ Soporta:
 - Paginación
 - Consulta por usuario, fecha, operación
 
+### Ejemplos de uso:
+1. `Consultar todo el historial: EXEC sp_GetAuditHistory;`
+2. `Filtrar por tabla: EXEC sp_GetAuditHistory @TableName = 'Users';`
+3. `Consultar historial de un registro específico: EXEC sp_GetAuditHistory @TableName = 'Users', @RecordId = 1;`
+4. `Filtrar por tipo de operación: EXEC sp_GetAuditHistory @Operation = 'DELETE_USER';`
+5. `Filtrar por usuario que ejecutó la acción: EXEC sp_GetAuditHistory @PerformedBy = 'SYSTEM';`
+6. `Filtrar por rango de fechas: EXEC sp_GetAuditHistory @DateFrom = '2026-05-01', @DateTo = '2026-05-03';`
+7. `Combinar filtros: EXEC sp_GetAuditHistory @TableName = 'Users', @Operation = 'UPDATE_USER', @DateFrom = '2026-05-01';`
+8. `Paginación: EXEC sp_GetAuditHistory @PageNumber = 2, @PageSize = 10;`
+9. `Consulta completa:
+EXEC sp_GetAuditHistory 
+    @TableName = 'Users',
+    @RecordId = 1,
+    @Operation = 'UPDATE_USER',
+    @PerformedBy = 'SYSTEM',
+    @DateFrom = '2026-05-01',
+    @DateTo = '2026-05-10',
+    @PageNumber = 1,
+    @PageSize = 10;`
+
 ---
 
 ## 🧠 Decisiones Técnicas
