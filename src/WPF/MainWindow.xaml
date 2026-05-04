@@ -1,0 +1,92 @@
+﻿<Window x:Class="WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gestión de Usuarios"
+        Height="500"
+        Width="800">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- FORMULARIO -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+
+            <TextBlock Text="Nombre"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+
+            <TextBlock Text="Contacto"/>
+            <TextBox Text="{Binding ContactInfo}" Margin="0,5"/>
+
+            <TextBlock Text="Rol"/>
+            <ComboBox ItemsSource="{Binding Roles}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding RoleId}"
+                      Margin="0,5"/>
+
+            <TextBlock Text="Área"/>
+            <ComboBox ItemsSource="{Binding Areas}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding AreaId}"
+                      IsEnabled="{Binding IsAreaEnabled}"
+                      Margin="0,5"/>
+
+        </StackPanel>
+
+        <!-- BOTONES -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10">
+
+            <Button Content="Crear Usuario"
+                    Command="{Binding CreateUserCommand}"
+                    Width="140"
+                    Margin="5"/>
+
+            <Button Content="Actualizar Usuario"
+                    Command="{Binding UpdateUserCommand}"
+                    Width="160"
+                    Margin="5"/>
+
+            <Button Content="Asignar Área"
+                    Command="{Binding AssignAreaCommand}"
+                    Width="140"
+                    Margin="5"/>
+
+            <Button Content="Eliminar Usuario"
+                    Command="{Binding DeleteUserCommand}"
+                    Width="150"
+                    Margin="5"/>
+
+            <Button Content="Limpiar"
+                    Command="{Binding ClearCommand}"
+                    Width="120"
+                    Margin="5"/>
+
+        </StackPanel>
+
+        <!-- DATA GRID -->
+        <DataGrid Grid.Row="2"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Contacto" Binding="{Binding ContactInfo}" Width="*"/>
+                <DataGridTextColumn Header="Rol" Binding="{Binding RoleName}" Width="*"/>
+                <DataGridTextColumn Header="Área" Binding="{Binding AreaName}" Width="*"/>
+                <DataGridCheckBoxColumn Header="Estado"  Binding="{Binding Status}" Width="80"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding CreatedAt}" Width="*"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</Window>
+    
