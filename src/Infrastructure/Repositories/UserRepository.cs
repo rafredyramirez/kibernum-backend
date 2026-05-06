@@ -16,6 +16,7 @@ namespace Infrastructure.Repositories
         }
         public async Task CreateUserAsync(string name, string contact, int roleId, string performedBy)
         {
+
             var parameters = new[]
             {
                 new SqlParameter("@Name", name),
